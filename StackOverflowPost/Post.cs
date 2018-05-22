@@ -7,67 +7,51 @@ namespace StackOverflowPost
         private string _title;
         private string _description;
         private DateTime _date;
-        private int _positiveVoteCount;
-        private int _negativeVoteCount;
-        private string _vote;
-        private bool _isRunning = true;
+        private int PositiveVoteCount { get; set; }
+        private int NegativeVoteCount { get; set; }
 
-
-        public void CreatePost()
+        public void CreatePost(string title, string description, DateTime date)
         {
-            Console.WriteLine("Title:");
-            _title = Console.ReadLine();
-            Console.WriteLine("Description:");
-            _description = Console.ReadLine();
-            _date = DateTime.Now;
+           
+            _title = title;
+            _description = description;
+            _date = date;
 
         }
 
-        public void ShowPost()
+        public string ShowTitle()
         {
-            Console.WriteLine();
-            Console.WriteLine("Title: {0}",_title);
-            Console.WriteLine("Description: {0}",_description);
-            Console.WriteLine(_date);
-            Console.WriteLine();
+            return _title;
         }
 
-        public void Vote()
+        public string ShowDescription()
         {
-            while (_isRunning)
-            {
-                Console.WriteLine("Do you like this post? y/n (To exit press e)");
-                _vote = Console.ReadLine();
-                switch (_vote.ToLower())
-                {
-                    case "y":
-                        UpVote();
-                        break;
-                    case "n":
-                        DownVote();
-                        
-                        break;
-                    case "e":
-                        Console.WriteLine();
-                        Console.WriteLine("Upvotes: {0}, Downvotes: {1}", _positiveVoteCount, _negativeVoteCount);
-                        Console.WriteLine("Exiting application...");
-                        _isRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Error try one of the inputs above");
-                        break;
-                }
-            }
+            return _description;
         }
 
-        private void UpVote()
+        public DateTime ShowDateTime()
         {
-            _positiveVoteCount++;
+            return _date;
         }
 
-        private void DownVote()
+        public int ShowUpVotes()
         {
-            _negativeVoteCount++;
+            return PositiveVoteCount;
+        }
+
+        public int ShowDownVotes()
+        {
+            return NegativeVoteCount;
+        }
+
+        public void UpVote()
+        {
+            PositiveVoteCount++;
+        }
+
+        public void DownVote()
+        {
+            NegativeVoteCount++;
         }
     }
 }
